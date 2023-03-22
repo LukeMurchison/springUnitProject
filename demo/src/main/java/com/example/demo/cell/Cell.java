@@ -26,10 +26,11 @@ public class Cell {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Anomaly getAnomaly() {return anomaly;}
-
-    
-
 
 
 }
