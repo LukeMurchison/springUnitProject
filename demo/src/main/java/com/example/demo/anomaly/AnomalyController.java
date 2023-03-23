@@ -1,4 +1,45 @@
 package com.example.demo.anomaly;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/anomaly")
 public class AnomalyController {
+    private final AnomalyService anomalyService;
+
+    @Autowired
+    AnomalyRepository anomalyRepository;
+    @Autowired
+    public AnomalyController(AnomalyService anomalyService) {
+        this.anomalyService = anomalyService;
+    }
+
+    // get and post anomaly
+    @GetMapping
+    List<Anomaly> getAnomaly() {
+        return anomalyRepository.findAll();
+    }
+
+    @PostMapping
+    Anomaly createAnomaly(@RequestBody Anomaly anomaly) {
+        return anomalyRepository.save(anomaly);
+    }
+
+    // update anomaly path link
+    @PutMapping(path = "{id}")
+    public void updateAnomaly(
+            @PathVariable(required = false) Long id,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String desc){
+        anomalyService.updateAnomaly(id, name, desc);
+    }
+
+    // delete anomaly path link
+    @DeleteMapping(path = "{id}")
+    public void deleteAnomaly(@PathVariable("id") Long id){
+        anomalyService.deleteAnomaly(id);
+    }
 }
