@@ -16,23 +16,52 @@ public class Cell {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "anomaly_id")
-    private Long id;
+    private Long cellId;
+    private String cellDescription;
+    private String cellLevel;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "anomaly_id")
-    private Anomaly anomaly;
 
-    private String description;
+//    @OneToOne
+//    @MapsId
+//    @JoinColumn(name = "anomaly_id")
+//    private Anomaly anomaly;
+//    private String cellDescription;
 
-    public Long getId() {return id;}
+    @ManyToMany
+    @JoinTable(
+            name = "containAnomalies",
+            joinColumns = @JoinColumn(name = "cellId"),
+            inverseJoinColumns = @JoinColumn(name = "anomalyId")
+    )
+    private Set<Anomaly> containAnomalies = new HashSet<>();
 
-    public String getDescription() {
-        return description;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cellId", referencedColumnName = "classificationId")
+    private Classification classification;
+
+    public Cell() {
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public Cell(Long cellId, String cellDescription, String cellLevel) {
+        this.cellId = cellId;
+        this.cellDescription = cellDescription;
+        this.cellLevel = cellLevel;
+    }
+
+    public Cell(String cellDescription, String cellLevel) {
+        this.cellDescription = cellDescription;
+        this.cellLevel = cellLevel;
+    }
+
+    // get id
+    public Long getCellId() {return cellId;}
+
+    // get and set desc
+    public String getCellDescription() {
+        return cellDescription;
+    }
+    public void setCellDescription(String cellDescription) {
+        this.cellDescription = cellDescription;
     }
 
     // get and set level
