@@ -23,18 +23,52 @@ public class AnomalyConfig {
                     "William The Snail",
                     "A snail"
             );
-            Anomaly William = new Anomaly(
-                    "William The Snail",
+            Anomaly Penguin = new Anomaly(
+                    "William The Penguin",
                     "A penguin"
             );
             Anomaly Dog = new Anomaly(
                     "Security Dog",
                     "A Dog"
             );
+            Anomaly MothMan = new Anomaly(
+                    "Moth Man",
+                    "A Moth Man"
+            );
+            Anomaly Kraken = new Anomaly(
+                    "Kraken",
+                    "A Kraken"
+            );
+            Anomaly Nessie = new Anomaly(
+                    "Loch Ness Monster",
+                    "A sea creature"
+            );
+            Anomaly Wendigo = new Anomaly(
+                    "Wendigo",
+                    "A wendy boi"
+            );
+            Anomaly Wisp = new Anomaly(
+                    "Will O'the Wisp",
+                    "Wisp"
+            );
+            Anomaly SCP999 = new Anomaly(
+                    "The Tickle Monster",
+                    "Orange Happy Blob"
+            );
+            Anomaly Toaster = new Anomaly(
+                    "A Toaster",
+                    "Still a toaster"
+            );
+            Anomaly Walter = new Anomaly(
+                    "Walter the Omnivorous Rabbit",
+                    "Bunny"
+            );
+
+
 
 
             repository.saveAll(
-                    List.of(mike, Beary, Snail)
+                    List.of(mike, Beary, Snail, Penguin, Dog, MothMan, Kraken, Nessie, Wendigo, Wisp, SCP999)
             );
         };
     }
