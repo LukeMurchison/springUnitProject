@@ -1,8 +1,12 @@
 package com.example.demo.anomaly;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -18,9 +22,12 @@ public class AnomalyController {
     }
 
     // get and post anomaly
-    @GetMapping
-    List<Anomaly> getAnomaly() {
-        return anomalyRepository.findAll();
+    @GetMapping("/")
+    public ModelAndView showAnomalies() {
+        ModelAndView mv = new ModelAndView("get_anomalies");
+        List<Anomaly> anomalies = anomalyRepository.findAll();
+        mv.addObject("anomalies", anomalies);
+        return mv;
     }
 //    gets single
     @GetMapping("/{id}")
