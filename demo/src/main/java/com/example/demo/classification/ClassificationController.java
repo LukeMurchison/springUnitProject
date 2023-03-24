@@ -1,9 +1,15 @@
 package com.example.demo.classification;
 
+import com.example.demo.anomaly.Anomaly;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collections;
 import java.util.List;
+
+@RestController
+@RequestMapping("/classification")
 public class ClassificationController {
     private final ClassificationService classificationService;
 
@@ -15,10 +21,22 @@ public class ClassificationController {
     }
 
     // get and post classification
-    @GetMapping
-    List<Classification> getClassification() {
-        return classificationRepository.findAll();
+    @GetMapping("/")
+    public ModelAndView showClassification() {
+        ModelAndView mv = new ModelAndView("get_classification");
+        List<Classification> classifications = classificationRepository.findAll();
+        mv.addObject("classifications", classifications);
+        return mv;
     }
+
+    @GetMapping("/{Id}")
+    public ModelAndView showOne(@PathVariable Long Id) {
+        ModelAndView mv = new ModelAndView("get_classification");
+        List<Classification> classifications = classificationRepository.findAllById(Collections.singleton(Id));
+        mv.addObject("classifications", classifications);
+        return mv;
+    }
+
     @PostMapping
     Classification createclassification(@RequestBody Classification classification) {
         return classificationRepository.save(classification);

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cells</title>
+</head>
+<body>
+<h1>Cells</h1>
+<ul>
+    <th:block th:each="cell : ${cells}">
+        <p th:text="'Cell Id: ' + ${cell.cellId}"></p>
+        <p th:text="'Level: ' + ${cell.cellLevel}"></p>
+        <th:block th:each="anomalies : ${cell.containAnomalies}">
+            <a th:href="@{~/anomaly/{id}(id=${anomalies.getAnomalyId()})}" th:text="'Anomolies Contained: ' + ${anomalies.getAnomalyName()}"></a>
+        </th:block>
+        <a href="/classification/" th:text="'Classification: ' + ${cell.classification}"></a>
+        <p th:text="'Cell Description: ' + ${cell.cellDescription}"></p>
+    </th:block>
+</ul>
+</body>
+</html>

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/anomaly")
 public class AnomalyController {
     private final AnomalyService anomalyService;
@@ -22,6 +22,14 @@ public class AnomalyController {
     List<Anomaly> getAnomaly() {
         return anomalyRepository.findAll();
     }
+//    gets single
+    @GetMapping("/{id}")
+    public ModelAndView showOne(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView("get_anomalies");
+        List<Anomaly> anomalies = anomalyRepository.findAllById(Collections.singleton(id));
+        mv.addObject("anomalies", anomalies);
+        return mv;
+    }
 
     @PostMapping
     Anomaly createAnomaly(@RequestBody Anomaly anomaly) {
@@ -33,8 +41,8 @@ public class AnomalyController {
     public void updateAnomaly(
             @PathVariable(required = false) Long id,
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String desc){
-        anomalyService.updateAnomaly(id, name, desc);
+            @RequestParam(required = false) String description){
+        anomalyService.updateAnomaly(id, name, description);
     }
 
     // delete anomaly path link

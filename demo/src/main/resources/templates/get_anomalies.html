@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Anomalies</title>
+</head>
+<body>
+<style>
+    body {
+        background-color: aqua;
+    }
+</style>
+<h1>Anomalies</h1>
+<ul>
+    <th:block th:each="anomaly : ${anomalies}">
+        <p th:text="'Anomaly Id: ' + ${anomaly.anomalyId}"></p>
+        <p th:text="'Anomaly Name: ' + ${anomaly.anomalyName}"></p>
+        <p th:text="'Anomaly Description: ' + ${anomaly.anomalyDescription}"></p>
+        <th:block th:each="cell : ${anomaly.cells}">
+            <a href="/cell/" th:text="'Cell Number: ' + ${cell.getCellId()}"></a>
+        </th:block>
+    </th:block>
+</ul>
+</body>
+</html>
