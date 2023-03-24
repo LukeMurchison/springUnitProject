@@ -20,13 +20,6 @@ public class Cell {
     private String cellDescription;
     private String cellLevel;
 
-
-//    @OneToOne
-//    @MapsId
-//    @JoinColumn(name = "anomaly_id")
-//    private Anomaly anomaly;
-//    private String cellDescription;
-
     @ManyToMany
     @JoinTable(
             name = "containAnomalies",
