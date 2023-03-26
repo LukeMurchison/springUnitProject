@@ -12,9 +12,7 @@ public class Classification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long classificationId;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "classification")
-    private Set<Cell> cells;
+
 
     private String classificationName;
 
@@ -40,9 +38,11 @@ public class Classification {
         this.classificationName = name;
     }
 
-    // see linked cells
-    public Set<Cell> getClassificationCells() {
-        return this.cells;
+
+
+    // get linked class
+    public String getCellClass() {
+        return this.classificationName;
     }
 
 

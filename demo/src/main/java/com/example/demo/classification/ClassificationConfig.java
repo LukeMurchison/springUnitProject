@@ -15,8 +15,11 @@ public class ClassificationConfig {
             Classification safe = new Classification(
                     "Safe"
             );
+            Classification notSafe = new Classification(
+                    "Not Safe"
+            );
             repository.saveAll(
-                    List.of(safe)
+                    List.of(safe, notSafe)
             );
         };
     }

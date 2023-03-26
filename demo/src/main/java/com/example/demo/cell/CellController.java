@@ -46,6 +46,8 @@ public class CellController {
         cellService.addAnomalyToCell(cellId, anomalyId);
     }
 
+
+
     // update cell path link
     @PutMapping(path = "{id}")
     public void updateCell(
