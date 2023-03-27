@@ -1,5 +1,7 @@
 package com.example.demo.anomaly;
 
+import com.example.demo.classification.Classification;
+import com.example.demo.classification.ClassificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,9 +13,11 @@ public class AnomalyService {
 
     // link to repo
     private final AnomalyRepository anomalyRepository;
+    private final ClassificationRepository classificationRepository;
     @Autowired
-    public AnomalyService(AnomalyRepository anomalyRepository){
+    public AnomalyService(AnomalyRepository anomalyRepository, ClassificationRepository classificationRepository){
         this.anomalyRepository = anomalyRepository;
+        this.classificationRepository = classificationRepository;
     }
 
     // update anomaly
@@ -35,5 +39,12 @@ public class AnomalyService {
             throw new IllegalStateException("Anomaly with Id " + id + " does not exists");
         }
         anomalyRepository.deleteById(id);
+    }
+
+    public void addAnomalyToClassification(Long anomalyId, Long classificationId) {
+        Anomaly anomaly = anomalyRepository.findById(anomalyId).get();
+        Classification classification = classificationRepository.findById(classificationId).get();
+        anomaly.assignClassification(classification);
+        anomalyRepository.save(anomaly);
     }
 }

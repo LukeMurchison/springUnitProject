@@ -1,9 +1,14 @@
 package com.example.demo.classification;
 
+import com.example.demo.anomaly.Anomaly;
 import com.example.demo.anomaly.AnomalyRepository;
+import com.example.demo.anomaly.AnomalyService;
+import com.example.demo.cell.Cell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.Objects;
 
@@ -11,12 +16,11 @@ import java.util.Objects;
 public class ClassificationService {
     // link to repo
     private final ClassificationRepository classificationRepository;
-    private final AnomalyRepository anomalyRepository;
+
     @Autowired
     public ClassificationService(ClassificationRepository classificationRepository
     ,AnomalyRepository anomalyRepository){
         this.classificationRepository = classificationRepository;
-        this.anomalyRepository = anomalyRepository;
     }
 
     // update Classification

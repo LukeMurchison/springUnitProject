@@ -52,6 +52,7 @@ public class AnomalyController {
         anomalyService.updateAnomaly(id, name, description);
     }
 
+
     // delete anomaly path link
     @DeleteMapping(path = "{id}")
     public void deleteAnomaly(@PathVariable("id") Long id){

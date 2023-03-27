@@ -1,8 +1,11 @@
 package com.example.demo.classification;
 
+import com.example.demo.anomaly.Anomaly;
 import com.example.demo.cell.Cell;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set;
 
 

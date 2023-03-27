@@ -1,6 +1,7 @@
 package com.example.demo.anomaly;
 
 import com.example.demo.cell.Cell;
+import com.example.demo.classification.Classification;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -18,6 +19,10 @@ public class Anomaly {
     @JsonIgnore
     @ManyToMany(mappedBy = "containAnomalies")
     private Set<Cell> cells = new HashSet<>();
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "classid", referencedColumnName = "classificationId")
+    private Classification classification;
 
     // columns
     private String anomalyName;
@@ -64,5 +69,17 @@ public class Anomaly {
     // get linked cells
     public Set<Cell> getCells() {
         return cells;
+    }
+
+    public Classification getClassification() {
+        return classification;
+    }
+
+    public void assignClassification(Classification classification) {
+        this.classification = classification;
+    }
+
+    public void setClassification(Classification classification) {
+        this.classification = classification;
     }
 }

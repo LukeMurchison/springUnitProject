@@ -1,6 +1,7 @@
 package com.example.demo.classification;
 
 import com.example.demo.anomaly.Anomaly;
+import com.example.demo.anomaly.AnomalyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,12 +13,14 @@ import java.util.List;
 @RequestMapping("/classification")
 public class ClassificationController {
     private final ClassificationService classificationService;
+    private final AnomalyService anomalyService;
 
     @Autowired
     ClassificationRepository classificationRepository;
     @Autowired
-    public ClassificationController(ClassificationService classificationService) {
+    public ClassificationController(ClassificationService classificationService, AnomalyService anomalyService) {
         this.classificationService = classificationService;
+        this.anomalyService = anomalyService;
     }
 
     // get and post classification
@@ -29,10 +32,10 @@ public class ClassificationController {
         return mv;
     }
 
-    @GetMapping("/{Id}")
-    public ModelAndView showOne(@PathVariable Long Id) {
+    @GetMapping("/{id}")
+    public ModelAndView showOne(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("get_classification");
-        List<Classification> classifications = classificationRepository.findAllById(Collections.singleton(Id));
+        List<Classification> classifications = classificationRepository.findAllById(Collections.singleton(id));
         mv.addObject("classifications", classifications);
         return mv;
     }
@@ -49,6 +52,14 @@ public class ClassificationController {
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String cells){
         classificationService.updateClassification(id, name);
+    }
+
+    @PutMapping("/{anomalyId}/class/{classificationId}")
+    public void addAnomalyToClassification(
+            @PathVariable Long anomalyId,
+            @PathVariable Long classificationId
+    ) {
+        anomalyService.addAnomalyToClassification(anomalyId, classificationId);
     }
 
     // delete classification path link
