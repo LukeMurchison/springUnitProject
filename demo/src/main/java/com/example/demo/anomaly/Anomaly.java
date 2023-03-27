@@ -21,6 +21,7 @@ public class Anomaly {
 
     // columns
     private String anomalyName;
+    @Column(length = 100000)
     private String anomalyDescription;
 
 

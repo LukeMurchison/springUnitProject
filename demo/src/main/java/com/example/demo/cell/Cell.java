@@ -19,6 +19,7 @@ public class Cell {
     private Long cellId;
     private String cellDescription;
     private String cellLevel;
+    private String cellClassification;
 
     @ManyToMany
     @JoinTable(
@@ -28,23 +29,11 @@ public class Cell {
     )
     private Set<Anomaly> containAnomalies = new HashSet<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cellId", referencedColumnName = "classificationId")
-    private Classification classification;
-
     public Cell() {
     }
-
-    public Cell(Long cellId, String cellDescription, String cellLevel) {
-        this.cellId = cellId;
-        this.cellDescription = cellDescription;
-        this.cellLevel = cellLevel;
+    public Cell(String cellDescription, String cellLevel, String cellClassification) {
     }
 
-    public Cell(String cellDescription, String cellLevel) {
-        this.cellDescription = cellDescription;
-        this.cellLevel = cellLevel;
-    }
 
     // get id
     public Long getCellId() {return cellId;}
@@ -65,18 +54,19 @@ public class Cell {
         this.cellLevel = cellLevel;
     }
 
+    // get and set class
+    public String getCellClassification() {
+        return cellClassification;
+    }
+    public void setCellClassification(String cellClassification) {
+        this.cellClassification = cellClassification;
+    }
+
     // get linked anomalies
     public Set<Anomaly> getContainAnomalies() {
         return this.containAnomalies;
     }
 
-    // get linked class
-    public Classification getClassification() {
-        return classification;
-    }
 
-    // set cell to a class
-    public void setClass(Classification classification) {
-        this.classification = classification;
-    }
+
 }

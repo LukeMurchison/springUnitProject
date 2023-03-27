@@ -14,7 +14,7 @@ public class Classification {
 
     @JsonIgnore
     @OneToMany(mappedBy = "classification")
-    private Set<Cell> cells;
+    private Set<Anomaly> assignAnomaly = new HashSet<>();
 
     private String classificationName;
 
@@ -40,9 +40,11 @@ public class Classification {
         this.classificationName = name;
     }
 
-    // see linked cells
-    public Set<Cell> getClassificationCells() {
-        return this.cells;
+
+
+    // get linked class
+    public String getCellClass() {
+        return this.classificationName;
     }
 
 

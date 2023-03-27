@@ -15,8 +15,14 @@ public class ClassificationConfig {
             Classification safe = new Classification(
                     "Safe"
             );
+            Classification euclid = new Classification(
+                    "Euclid"
+            );
+            Classification keter = new Classification(
+                    "Keter"
+            );
             repository.saveAll(
-                    List.of(safe)
+                    List.of(safe, euclid, keter)
             );
         };
     }

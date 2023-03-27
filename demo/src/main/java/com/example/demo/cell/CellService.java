@@ -2,7 +2,8 @@ package com.example.demo.cell;
 
 import com.example.demo.anomaly.Anomaly;
 import com.example.demo.anomaly.AnomalyRepository;
-import com.example.demo.anomaly.AnomalyService;
+import com.example.demo.classification.Classification;
+import com.example.demo.classification.ClassificationRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Objects;
@@ -12,9 +13,12 @@ public class CellService {
     private final CellRepository cellRepository;
     private final AnomalyRepository anomalyRepository;
 
-    public CellService(CellRepository cellRepository, AnomalyRepository anomalyRepository) {
+    private final ClassificationRepository classificationRepository;
+
+    public CellService(CellRepository cellRepository, AnomalyRepository anomalyRepository, ClassificationRepository classificationRepository) {
         this.cellRepository = cellRepository;
         this.anomalyRepository = anomalyRepository;
+        this.classificationRepository = classificationRepository;
     }
 
     @Transactional
@@ -40,5 +44,7 @@ public class CellService {
         cell.getContainAnomalies().add(anomaly);
         cellRepository.save(cell);
     }
+
+
 
 }
